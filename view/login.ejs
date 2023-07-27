@@ -110,7 +110,7 @@
 
           <% if( success_messages !="" ){ %>
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong> Success</strong>
+                <strong> Sucesso </strong>
                 <%= success_messages %>.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -119,7 +119,7 @@
         <form action="/login" , method="POST">
           <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
           <div class="mb-3">
-            <label for="username">Enter Your Email</label>
+            <label for="username">Digite seu e-mail</label>
             <input
               type="email"
               class="form-control form-control-lg"
@@ -131,7 +131,7 @@
             />
           </div>
           <div class="mb-3">
-            <label for="password">Enter Your Password</label>
+            <label for="password">Coloque sua senha</label>
             <input
               type="password"
               class="form-control form-control-lg"
@@ -154,11 +154,11 @@
             
             
           </div>
-          <p>New Here ? <a class="card-link" href="/signup">Register Now</a></p>
+          <p>New Here ? <a class="card-link" href="/signup">Registre-se agora</a></p>
           <!-- added a new button for redirecting to forgot password page  -->
           <p>
             <a class="card-link" href="/forgot-password"
-              >Forgot Password</a
+              >Esqueceu sua senha</a
             >
           </p>
         </form>
