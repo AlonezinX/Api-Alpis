@@ -26,14 +26,14 @@ function checkAuth(req, res, next) {
         res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, post-check=0, pre-check=0');
         next();
     } else {
-        req.flash('error_messages', "Please Login to continue !");
+        req.flash('error_messages', "Por favor faça o login para continuar !");
         res.redirect('/login');
     }
 }
 
  function captchaForgotPassword(req, res, next) {
     if (req.recaptcha.error) {
-        req.flash('error_messages','reCAPTCHA Tidak Valid');
+        req.flash('error_messages','reCAPTCHA inválido');
         res.redirect('/forgot-password');
     } else {
         return next();
@@ -43,7 +43,7 @@ function checkAuth(req, res, next) {
 function captchaResetPassword(req, res, next) {
     const { token } = req.body;
     if (req.recaptcha.error) {
-        req.flash('error_messages','reCAPTCHA Tidak Valid');
+        req.flash('error_messages','reCAPTCHA inválido');
         res.redirect(`/reset-password?token=${token}`);
     } else {
         return next();
@@ -52,7 +52,7 @@ function captchaResetPassword(req, res, next) {
 
 function captchaRegister(req, res, next) {
     if (req.recaptcha.error) {
-        req.flash('error_messages','reCAPTCHA Tidak Valid');
+        req.flash('error_messages','reCAPTCHA inválido');
         res.redirect('/signup');
     } else {
         return next();
@@ -61,7 +61,7 @@ function captchaRegister(req, res, next) {
 
  function captchaLogin(req, res, next) {
     if (req.recaptcha.error) {
-        req.flash('error_messages','reCAPTCHA Tidak Valid');
+        req.flash('error_messages','reCAPTCHA inválido');
         res.redirect('/login');
     } else {
         return next();
@@ -117,35 +117,35 @@ router.post('/signup', recaptcha.middleware.verify, captchaRegister, async(req, 
     }
 
     if (!email || !username || !password || !confirmpassword) {
-        req.flash('error_messages','All Fields Required !');
+        req.flash('error_messages','Todos os campos obrigatórios !');
         res.redirect('/signup');
     } else if (password != confirmpassword) {
-        req.flash('error_messages',"Password Don't Match !");
+        req.flash('error_messages',"A senha não corresponde !");
         res.redirect('/signup');
     } else if(!checkpw ) {
-        req.flash('error_messages',"Password Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters,no emoji and no Space Limit 30 text");
+        req.flash('error_messages',"A senha deve conter pelo menos um número e uma letra maiúscula e minúscula e pelo menos 8 ou mais caracteres, sem emoji e sem texto com limite de espaço 30");
         res.redirect('/signup');  
     } else if (containsEmoji(password)) {
-        req.flash('error_messages',"Password Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters,no emoji and no Space Limit 30 text");
+        req.flash('error_messages',"A senha deve conter pelo menos um número e uma letra maiúscula e minúscula e pelo menos 8 ou mais caracteres, sem emoji e sem texto com limite de espaço 30");
         res.redirect('/signup');  
     } else if(username.length < 4) {
-        req.flash('error_messages',"Username harus minimal 4 karakter");
+        req.flash('error_messages',"O nome de usuário deve ter pelo menos 4 caracteres");
         res.redirect('/signup');
     } else if(username.length > 20) {
-        req.flash('error_messages',"Limit Username tidak boleh lebih 20 karakter");
+        req.flash('error_messages',"O limite de nome de usuário não pode ter mais de 20 caracteres");
         res.redirect('/signup');
     } else if (containsEmoji(username)) {
-        req.flash('error_messages',"Username Tidak boleh guna emoji");
+        req.flash('error_messages',"Nome de usuário Não pode usar emoji");
         res.redirect('/signup');  
     }else if(!checkemail){
-        req.flash('error_messages',"Sorry kami terima Account Gmail Sahaja");
+        req.flash('error_messages',"Desculpe, só aceitamos contas do Gmail");
         res.redirect('/signup');  
     }else{
 
         user.findOne({ $or: [{ email: email }, { username: username }] }, function (err, data) {
             if (err) throw err;
             if (data) {
-                req.flash('error_messages',"User Exists, Try Logging In !");
+                req.flash('error_messages',"O usuário já existe, tente fazer login !");
                 res.redirect('/signup');
             } else {
                 bcryptjs.genSalt(12, (err, salt) => {
@@ -161,7 +161,7 @@ router.post('/signup', recaptcha.middleware.verify, captchaRegister, async(req, 
 
                         }).save((err, data) => {
                             if (err) throw err;
-                            req.flash('success_messages',"Account Succes Create Sila Login");
+                            req.flash('success_messages',"Sucesso na conta criar seu login");
                             res.redirect('/login');
                         });
                     })
@@ -177,17 +177,17 @@ router.get('/send-verification-email', checkAuth, async (req, res) => {
         res.redirect('/docs');
     } else {
         if (check) {
-        req.flash('error_messages', 'Please Dont Spam Wait After 30 minit.')
+        req.flash('error_messages', 'Por favor, não faça spam. Espere 30 minutos.')
         res.redirect('/docs');
         }else{
          var token = crypto.randomBytes(32).toString('hex');
         await VerifyUser({ token: token, email: req.user.email }).save();
         var mail =await mailer.sendVerifyEmail(req.user.email, token)
         if(mail == 'error'){
-            req.flash('error_messages','Error Please Try Again Tomorrow');
+            req.flash('error_messages','Erro, por favor tente novamente amanhã');
             res.redirect('/docs');
         }else{
-        req.flash('success_messages', 'Done Sent Email Link Expired After 30 mnit.')
+        req.flash('success_messages', 'Concluído, Link de e-mail enviado, expira após 30 minutos.')
         res.redirect('/docs');
         }
 
@@ -210,7 +210,7 @@ router.get('/verifyemail', async (req, res) => {
             if (req.user) {
             res.redirect("docs");
         }else{
-            req.flash('error_messages', 'Link Expired Or Error')
+            req.flash('error_messages', 'Link expirado ou erro')
             res.redirect('/login');
         }
     }
@@ -218,7 +218,7 @@ router.get('/verifyemail', async (req, res) => {
         if (req.user) {
             res.redirect("docs");
         }else{
-            req.flash('error_messages', 'Token Missing')
+            req.flash('error_messages', 'Token faltando')
             res.redirect('/login');
         }
     }
@@ -236,7 +236,7 @@ router.post('/forgot-password', recaptcha.middleware.verify, captchaForgotPasswo
     const { email } = req.body;
 
 	if (!email ) {
-        req.flash('error_messages','All Fields Required !');
+        req.flash('error_messages','Todos os campos obrigatórios !');
         res.redirect('/forgot-password');
     }
     var userData = await user.findOne({ email: email });
@@ -244,24 +244,24 @@ router.post('/forgot-password', recaptcha.middleware.verify, captchaForgotPasswo
 
 if (userData) {
 if (Cooldown) {
-    req.flash('error_messages','Please Dont Spam Wait After 30 minit after new submit.');
+    req.flash('error_messages','Por favor, não faça spam, aguarde 30 minutos após o novo envio.');
     res.redirect('/forgot-password')
             
  }else{
             var token = crypto.randomBytes(32).toString('hex');
             var mail = await mailer.sendResetEmail(email, token)
             if(mail == 'error'){
-                req.flash('error_messages','Error Please Try Again Tomorrow');
+                req.flash('error_messages','Erro, por favor, tente novamente amanhã');
                 res.redirect('/forgot-password');
             }else{
              await resetToken({ token: token, email: email }).save();
-            req.flash('success_messages','Check your email for more info, wait 30 minit after new submit.');
+            req.flash('success_messages','Verifique seu e-mail para mais informações, aguarde 30 minutos após o novo envio.');
             res.redirect('/forgot-password');    
             }
            
  }
     } else {
-        req.flash('error_messages','No user Exists with this email');
+        req.flash('error_messages','Nenhum usuário existe com este e-mail');
         res.redirect('/forgot-password');
     }
 });
@@ -280,7 +280,7 @@ router.get('/reset-password', recaptcha.middleware.render, async (req, res) => {
                 token: token
              });
         } else {
-            req.flash('error_messages','Token Tampered or Expired.');
+            req.flash('error_messages','Token adulterado ou expirado.');
             res.redirect('/forgot-password');
         }
     } else {
@@ -305,10 +305,10 @@ resetpw
 var checkpw = resetpw.validate(password)
 
     if (!password || !confirmpassword || confirmpassword != password) {
-        req.flash('error_messages',"Passwords Don't Match !");
+        req.flash('error_messages',"As senhas não correspondem !");
         res.redirect(`/reset-password?token=${token}`);
     } else if(!checkpw) {
-        req.flash('error_messages',"Password Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters,no emoji and no Space Limit 30 text");
+        req.flash('error_messages',"A senha deve conter pelo menos um número e uma letra maiúscula e minúscula e pelo menos 8 ou mais caracteres, sem emoji e sem texto com limite de espaço 30");
         res.redirect(`/reset-password?token=${token}`);
     } else {
         var salt = await bcryptjs.genSalt(12);
@@ -316,10 +316,10 @@ var checkpw = resetpw.validate(password)
             var hash = await bcryptjs.hash(password, salt);
             await user.findOneAndUpdate({ email: email }, { $set: { password: hash } });
             await resetToken.findOneAndDelete({ token: token });
-            req.flash('success_messages', 'Password Has Change')
+            req.flash('success_messages', 'A senha foi alterada')
             res.redirect('/login');
         } else {
-        req.flash('error_messages',"Unexpected Error Try Again");
+        req.flash('error_messages',"Erro inesperado, Tente novamente");
         res.redirect(`/reset-password?token=${token}`);
         }
     }
