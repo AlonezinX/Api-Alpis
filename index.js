@@ -34,7 +34,7 @@ const dataweb = require("./model/DataWeb");
 
 async function resetapi() {
   await User.updateMany({}, { $set: { limitApikey: LimitApikey } });
-  console.log("RESET LIMIT DONE");
+  console.log("REDEFINIR LIMITE CONCLUÍDO");
 }
 
 async function ResetRequestToday() {
@@ -44,7 +44,7 @@ async function ResetRequestToday() {
       RequestToday: 0,
     }
   );
-  console.log("RESET Request Today DONE");
+  console.log("Solicitação RESET hoje CONCLUÍDA");
 }
 
 //_______________________ ┏ Code ┓ _______________________\\
@@ -64,12 +64,12 @@ mongoose.set("strictQuery", false);
 mongoose
   .connect(keymongodb, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(async () => {
-    console.log("Connected !");
+    console.log("Connectado !");
     let limit = await dataweb.findOne();
     if (limit === null) {
       let obj = { RequestToday: 0 };
       await dataweb.create(obj);
-      console.log("DATA WEBSITE Sussces Create");
+      console.log("SITE DE DADOS Sucessos Criar");
     }
   });
 
@@ -83,7 +83,7 @@ cron.schedule(
   },
   {
     scheduled: true,
-    timezone: "Asia/Kuala_Lumpur",
+    timezone: "America/Sao_Paulo",
   }
 );
 
@@ -95,7 +95,7 @@ cron.schedule(
   },
   {
     scheduled: true,
-    timezone: "Asia/Kuala_Lumpur",
+    timezone: "America/Sao_Paulo",
   }
 );
 
