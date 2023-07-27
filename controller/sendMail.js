@@ -21,7 +21,7 @@ module.exports.sendResetEmail = async (email, token) => {
   await smtpTransport.sendMail({
     from: fromsendemail,
     to: email,
-    subject: "MENETAPKAN SEMULA KATA LALUAN ANDA",
+    subject: "REDEFINIR SUA SENHA",
     html: `
     <!DOCTYPE html>
     <html>
@@ -102,7 +102,7 @@ module.exports.sendResetEmail = async (email, token) => {
     <body style="background-color: #e9ecef;">
     
       <div class="preheader" style="display: none; max-width: 0; max-height: 0; overflow: hidden; font-size: 1px; line-height: 1px; color: #fff; opacity: 0;">
-        A preheader is the short summary text that follows the subject line when an email is viewed in the inbox.
+        Um pré-cabeçalho é o texto de resumo curto que segue a linha de assunto quando um e-mail é visualizado na caixa de entrada.
       </div>
 
       <table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -128,7 +128,7 @@ module.exports.sendResetEmail = async (email, token) => {
             <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
               <tr>
                 <td align="left" bgcolor="#ffffff" style="padding: 36px 24px 0; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; border-top: 3px solid #d4dadf;">
-                  <h1 style="margin: 0; font-size: 32px; font-weight: 700; letter-spacing: -1px; line-height: 48px;">Menetapkan Semula Kata Laluan Anda</h1>
+                  <h1 style="margin: 0; font-size: 32px; font-weight: 700; letter-spacing: -1px; line-height: 48px;">Redefinindo sua senha</h1>
                 </td>
               </tr>
             </table>
@@ -144,7 +144,7 @@ module.exports.sendResetEmail = async (email, token) => {
               <tr>
                 <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
                   <p style="margin: 0;">
-                    Masalah melog masuk?<br>Menetapkan semula kata laluan anda adalah mudah.<br><br>Hanya tekan butang di bawah dan ikut arahan. Kami akan membantu anda beroperasi dalam masa yang singkat.</p>
+                    Problemas para fazer login?<br>Redefinir sua senha é fácil.<br><br>Basta clicar no botão abaixo e seguir as instruções. Vamos colocá-lo em funcionamento em nenhum momento.</p>
                 </td>
               </tr>
 
@@ -156,7 +156,7 @@ module.exports.sendResetEmail = async (email, token) => {
                         <table border="0" cellpadding="0" cellspacing="0">
                           <tr>
                             <td align="center" bgcolor="#1a82e2" style="border-radius: 6px;">
-                              <a href="${url}" target="_blank" style="display: inline-block; padding: 16px 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 6px;">Menetapkan semula kata laluan</a>
+                              <a href="${url}" target="_blank" style="display: inline-block; padding: 16px 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 6px;">Redefinir senha</a>
                             </td>
                           </tr>
                         </table>
@@ -169,7 +169,7 @@ module.exports.sendResetEmail = async (email, token) => {
 
               <tr>
                 <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; border-bottom: 3px solid #d4dadf">
-                  <p style="margin: 0;">Aliff,<br> ${domain}</p>
+                  <p style="margin: 0;">alonezxkk,<br> ${domain}</p>
                 </td>
               </tr>
     
@@ -185,7 +185,7 @@ module.exports.sendResetEmail = async (email, token) => {
     
               <tr>
                 <td align="center" bgcolor="#e9ecef" style="padding: 12px 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20px; color: #666;">
-                  <p style="margin: 0;">Jika anda tidak membuat permintaan ini, sila abaikan e-mel ini..</p>
+                  <p style="margin: 0;">Se você não fez esta solicitação, ignore este e-mail.</p>
                 </td>
               </tr>
     
@@ -203,7 +203,7 @@ module.exports.sendResetEmail = async (email, token) => {
   }, (error, info) => {
     if (error) {
       resolve('error')
-      console.log(`[!] Warning SMTP error ,Limit Habis`);
+      console.log(`[!] Aviso de erro de SMTP, Limite Habis`);
     } else{
       resolve()
     }
@@ -222,7 +222,7 @@ module.exports.sendVerifyEmail = async (email, token) => {
   await smtpTransport.sendMail({
     from: fromsendemail,
     to: email,
-    subject: "SAHKAN EMAIL ANDA",
+    subject: "AUTORIZAR SEU E-MAIL",
     html: `
     <!DOCTYPE html>
     <html>
@@ -303,7 +303,7 @@ module.exports.sendVerifyEmail = async (email, token) => {
     <body style="background-color: #e9ecef;">
     
       <div class="preheader" style="display: none; max-width: 0; max-height: 0; overflow: hidden; font-size: 1px; line-height: 1px; color: #fff; opacity: 0;">
-        Sahkan E-mel Anda Dengan klik Buton Di Bawah.
+        Verifique seu e-mail clicando no botão abaixo.
       </div>
 
       <table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -329,7 +329,7 @@ module.exports.sendVerifyEmail = async (email, token) => {
             <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
               <tr>
                 <td align="left" bgcolor="#ffffff" style="padding: 36px 24px 0; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; border-top: 3px solid #d4dadf;">
-                  <h1 style="margin: 0; font-size: 32px; font-weight: 700; letter-spacing: -1px; line-height: 48px;">Sahkan Alamat E-mel Anda</h1>
+                  <h1 style="margin: 0; font-size: 32px; font-weight: 700; letter-spacing: -1px; line-height: 48px;">Verifique seu endereço de e-mail</h1>
                 </td>
               </tr>
             </table>
@@ -344,7 +344,7 @@ module.exports.sendVerifyEmail = async (email, token) => {
     
               <tr>
                 <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-                  <p style="margin: 0;">Terima kasih kerana guna rest api alpis, Sila tekan button di bawah untuk sahkan akaun anda.</p>
+                  <p style="margin: 0;">Obrigado por usar o rest api da anya. Pressione o botão abaixo para verificar sua conta.</p>
                 </td>
               </tr>
 
@@ -356,7 +356,7 @@ module.exports.sendVerifyEmail = async (email, token) => {
                         <table border="0" cellpadding="0" cellspacing="0">
                           <tr>
                             <td align="center" bgcolor="#1a82e2" style="border-radius: 6px;">
-                              <a href="${url}" target="_blank" style="display: inline-block; padding: 16px 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 6px;">Sahkan E-mel</a>
+                              <a href="${url}" target="_blank" style="display: inline-block; padding: 16px 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 6px;">Confirmar e-mail</a>
                             </td>
                           </tr>
                         </table>
@@ -369,7 +369,7 @@ module.exports.sendVerifyEmail = async (email, token) => {
 
               <tr>
                 <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; border-bottom: 3px solid #d4dadf">
-                  <p style="margin: 0;">Aliff,<br> ${domain}</p>
+                  <p style="margin: 0;">alonezxkk,<br> ${domain}</p>
                 </td>
               </tr>
     
@@ -385,7 +385,7 @@ module.exports.sendVerifyEmail = async (email, token) => {
     
               <tr>
                 <td align="center" bgcolor="#e9ecef" style="padding: 12px 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20px; color: #666;">
-                  <p style="margin: 0;">Anda menerima e-mel ini kerana kami menerima permintaan untuk pengesahan akaun untuk akaun anda. Jika anda tidak meminta pengesahan akaun anda boleh memadamkan e-mel ini dengan selamat.</p>
+                  <p style="margin: 0;">Você está recebendo este e-mail porque recebemos uma solicitação de verificação da sua conta. Se você não solicitar a verificação da conta, poderá excluir este e-mail com segurança.</p>
                 </td>
               </tr>
     
@@ -403,7 +403,7 @@ module.exports.sendVerifyEmail = async (email, token) => {
 }, (error, info) => {
   if (error) {
     resolve('error')
-    console.log(`[!] Warning SMTP error ,Limit Habis`);
+    console.log(`[!] Aviso de erro de SMTP, Limite Habis`);
   } else{
     resolve()
   }
